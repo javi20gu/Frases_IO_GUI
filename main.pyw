@@ -2,10 +2,13 @@ from sys import argv, exit
 from PyQt5.Qt import Qt
 from os import getcwd
 
-from modules import extractTipos 
-from modules import extractDefiniciones
+from modules import Extractor
 from modules.dicc import ABREVIACIONES
 from UI.UI_main import QtWidgets, QtCore, Ui_Principal, QtGui
+
+
+URL = "http://www.wordreference.com/definicion/"
+extractor = Extractor(URL)
 
 
 class App(QtWidgets.QWidget):
@@ -15,7 +18,8 @@ class App(QtWidgets.QWidget):
         self.ui = Ui_Principal()
         self.ui.setupUi(self)
         self.setWindowFlags(Qt.FramelessWindowHint)
-        self.ui.salir.setIcon(QtGui.QIcon("{}/asserts/salir.png".format(getcwd())))
+        self.ui.salir.setIcon(QtGui.QIcon(
+            "{}/assets/salir.png".format(getcwd())))
         self.ui.salir.clicked.connect(self.salir)
         self.ui.inputTexto.returnPressed.connect(self.entrada)
 
@@ -41,39 +45,40 @@ class App(QtWidgets.QWidget):
         self.process.setVentanaPadre(self.ui)
         self.process.start()
 
-        
+
 class SecondProcess(QtCore.QThread):
 
     def __init__(self):
         super().__init__()
 
     def run(self):
-        
+
         if self.ventana.modoTipo.isChecked():
             for palabra in self.palabras:
-                tipos = extractTipos(palabra)
-            
+                tipos = extractor.tipos(palabra)
+
                 if tipos:
                     try:
                         tipos = [ABREVIACIONES[tipo] for tipo in tipos]
                         resultado = " o ".join(tipos)
                         self.ventana.inputResultado.addItem("La palabra |-{}-| es de tipo:  {}"
-                            .format(palabra, resultado))
+                                                            .format(palabra, resultado))
                     except KeyError as a:
-                        self.ventana.inputResultado.addItem("Error ({}): Abreviatura no incluida en el diccionario ({}), si quiere informar utilize el email -> javierhidalgo_c@hotmail.com".format(palabra, a))
-    
+                        self.ventana.inputResultado.addItem(
+                            "Error ({}): Abreviatura no incluida en el diccionario ({}), si quiere informar utilize el email -> javierhidalgo_c@hotmail.com".format(palabra, a))
+
                 else:
                     self.ventana.inputResultado.addItem(
                         "La palabra |-{}-| aún no está"
                         " en el diccionario".format(palabra))
-        else: 
+        else:
             for palabra in self.palabras:
-                tipos = extractDefiniciones(palabra)
-            
+                tipos = extractor.definiciones(palabra)
+
                 if tipos:
                     resultado = "\n -->".join(tipos)
                     self.ventana.inputResultado.addItem("La palabra |-{}-| se usa para:  \n --> {}"
-                        .format(palabra, resultado))
+                                                        .format(palabra, resultado))
                 else:
                     self.ventana.inputResultado.addItem(
                         "La palabra |-{}-| aún no está"
@@ -82,8 +87,9 @@ class SecondProcess(QtCore.QThread):
     def setPalabras(self, palabras: list):
         self.palabras = palabras
 
-    def setVentanaPadre(self, ventanaPadre): 
+    def setVentanaPadre(self, ventanaPadre):
         self.ventana = ventanaPadre
+
 
 if __name__ == '__main__':
     cmd = QtWidgets.QApplication(argv)

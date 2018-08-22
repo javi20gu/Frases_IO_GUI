@@ -1,3 +1,2 @@
-from .extractTipos import extractTipos
-from .extractDefiniciones import extractDefiniciones
+from .extractor import Extractor
 from .dicc import ABREVIACIONES
