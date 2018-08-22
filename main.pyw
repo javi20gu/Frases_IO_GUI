@@ -14,7 +14,7 @@ class App(QtWidgets.QWidget):
         self.ui = Ui_Principal()
         self.ui.setupUi(self)
         self.setWindowFlags(Qt.FramelessWindowHint)
-        self.ui.salir.setIcon(QtGui.QIcon("{}\\asserts\\salir.png".format(getcwd())))
+        self.ui.salir.setIcon(QtGui.QIcon("{}/asserts/salir.png".format(getcwd())))
         self.ui.salir.clicked.connect(self.salir)
         self.ui.inputTexto.returnPressed.connect(self.entrada)
 
@@ -35,7 +35,7 @@ class App(QtWidgets.QWidget):
 
     def entrada(self):
         palabras = self.ui.inputTexto.text().split(" ")
-
+        self.ventana = QtWidgets.QWidget()
         self.process = SecondProcess()
         self.process.setPalabras(palabras)
         self.process.setVentanaPadre(self)
@@ -48,7 +48,10 @@ class SecondProcess(QtCore.QThread):
         super().__init__()
 
     def run(self):
-
+        proceso = QtWidgets.QProgressBar(self.ventana)
+        proceso.setMaximum(0)
+        proceso.setMinimum(0)
+        self.ventana.show()
         for palabra in self.palabras:
             tipos = extract(palabra)
             
@@ -64,8 +67,8 @@ class SecondProcess(QtCore.QThread):
             else:
                 self.ventana.ui.inputResultado.addItem(
                     "La palabra |-{}-| aún no está"
-                    " en el diccionario\n".format(palabra))
-    
+                    " en el diccionario".format(palabra))
+        self.ventana.close()
     def setPalabras(self, palabras: list):
         self.palabras = palabras
 
