@@ -11,9 +11,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Principal(object):
     def setupUi(self, Principal):
         Principal.setObjectName("Principal")
-        Principal.resize(651, 361)
+        Principal.resize(661, 371)
         Principal.setMinimumSize(QtCore.QSize(651, 361))
-        Principal.setMaximumSize(QtCore.QSize(651, 361))
+        Principal.setMaximumSize(QtCore.QSize(661, 371))
         Principal.setStyleSheet("background-color: rgb(238, 238, 238);")
         self.texto = QtWidgets.QLabel(Principal)
         self.texto.setGeometry(QtCore.QRect(20, 0, 191, 71))
@@ -23,7 +23,7 @@ class Ui_Principal(object):
 "}")
         self.texto.setObjectName("texto")
         self.inputTexto = QtWidgets.QLineEdit(Principal)
-        self.inputTexto.setGeometry(QtCore.QRect(20, 80, 611, 41))
+        self.inputTexto.setGeometry(QtCore.QRect(20, 80, 621, 41))
         self.inputTexto.setStyleSheet("#inputTexto {\n"
 "    border-radius: 5px;\n"
 "    border: 0.5px solid rgb(217, 217, 217);\n"
@@ -39,7 +39,7 @@ class Ui_Principal(object):
         self.inputTexto.setClearButtonEnabled(True)
         self.inputTexto.setObjectName("inputTexto")
         self.inputResultado = QtWidgets.QListWidget(Principal)
-        self.inputResultado.setGeometry(QtCore.QRect(20, 161, 611, 171))
+        self.inputResultado.setGeometry(QtCore.QRect(20, 161, 621, 181))
         font = QtGui.QFont()
         font.setFamily("Gill Sans MT")
         font.setPointSize(14)
@@ -64,6 +64,24 @@ class Ui_Principal(object):
         self.salir.setText("")
         self.salir.setIconSize(QtCore.QSize(53, 53))
         self.salir.setObjectName("salir")
+        self.modoTipo = QtWidgets.QRadioButton(Principal)
+        self.modoTipo.setGeometry(QtCore.QRect(20, 140, 51, 17))
+        font = QtGui.QFont()
+        font.setFamily("Nirmala UI")
+        font.setPointSize(9)
+        font.setBold(False)
+        font.setWeight(50)
+        self.modoTipo.setFont(font)
+        self.modoTipo.setStyleSheet("")
+        self.modoTipo.setChecked(True)
+        self.modoTipo.setObjectName("modoTipo")
+        self.modoDefinicion = QtWidgets.QRadioButton(Principal)
+        self.modoDefinicion.setGeometry(QtCore.QRect(80, 140, 81, 17))
+        font = QtGui.QFont()
+        font.setFamily("Nirmala UI")
+        font.setPointSize(9)
+        self.modoDefinicion.setFont(font)
+        self.modoDefinicion.setObjectName("modoDefinicion")
 
         self.retranslateUi(Principal)
         QtCore.QMetaObject.connectSlotsByName(Principal)
@@ -73,4 +91,6 @@ class Ui_Principal(object):
         Principal.setWindowTitle(_translate("Principal", "Frases IO"))
         self.texto.setText(_translate("Principal", "FRASES IO"))
         self.inputTexto.setPlaceholderText(_translate("Principal", "INTRODUCE TU FRASE O PALABRA"))
+        self.modoTipo.setText(_translate("Principal", "Tipo"))
+        self.modoDefinicion.setText(_translate("Principal", "Definición"))
 

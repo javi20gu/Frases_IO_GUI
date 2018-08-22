@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 URL = "http://www.wordreference.com/definicion/"
 
 
-def extract(palabra: str):
+def extractDefiniciones(palabra: str):
     # Obtenemos los datos, segun la palabra que introduzcamos.
     r = requests.get(URL + palabra)
 
@@ -18,4 +18,4 @@ def extract(palabra: str):
         # Comprobamos que la palabra exista.
         if definiciones:
             # Retornamos los tipos de la palabra.
-            return [definicion.getText()[:definicion.getText()[:17].rfind(".")] for definicion in definiciones]
+            return [definicion.getText() for definicion in definiciones]
