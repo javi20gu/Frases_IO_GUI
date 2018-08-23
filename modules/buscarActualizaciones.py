@@ -19,8 +19,7 @@ def buscarActualizacion():
         # Extraemos todos los datos
         soup = BeautifulSoup(r.text, "html.parser")
         # Buscamos todas las definiciones.
-        definiciones = soup.find_all("span", {"class": "pl-c1"})
+        definiciones = soup.find_all("span", {"class": "pl-s"})
         versiones = [definicion.getText() for definicion in definiciones]
-        for version in versiones:
-            if version > INFORMACION["Version"]:
-                QMessageBox().information(QWidget(), "Actualización", "Nueva Actualización disponible v{}".format(version))
+        if versiones[5] != INFORMACION.get("Version"):
+            QMessageBox().information(QWidget(), "Actualización", "Nueva Actualización disponible ")
