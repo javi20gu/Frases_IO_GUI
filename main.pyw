@@ -99,6 +99,8 @@ if __name__ == '__main__':
         app.show()
         ventana.finish(app)
     else:
+        from webbrowser import open
+        open("https://github.com/javi20gu/Frases_IO_GUI")
         ventana.close()
         exit()
     exit(cmd.exec_())
