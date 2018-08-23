@@ -1,6 +1,7 @@
 from sys import argv, exit
 from PyQt5.Qt import Qt
 from os import getcwd
+from threading import Thread
 
 from modules import buscarActualizacion
 from modules import extractTipos 
@@ -95,5 +96,5 @@ if __name__ == '__main__':
     app = App()
     app.show()
     ventana.finish(app)
-    buscarActualizacion()
+    Thread(target=buscarActualizacion)
     exit(cmd.exec_())
