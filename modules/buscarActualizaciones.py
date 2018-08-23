@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QMessageBox, QWidget
 from .version import INFORMACION
 
 
-URL = "https://github.com/javi20gu/Frases_IO_GUI/blob/master/version.json"
+URL = "https://github.com/javi20gu/Frases_IO_GUI/blob/master/modules/version.py"
 
 
 def buscarActualizacion():
