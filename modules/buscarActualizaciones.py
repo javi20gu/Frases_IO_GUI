@@ -7,10 +7,10 @@ from PyQt5.QtWidgets import QMessageBox, QWidget
 from .version import INFORMACION
 
 
-URL = "https://github.com/javi20gu/Frases_IO_GUI/blob/master/modules/version.py"
-
-
 def buscarActualizacion():
+
+    URL = "https://github.com/javi20gu/Frases_IO_GUI/blob/master/modules/version.py"
+
     # Obtenemos los datos, segun la palabra que introduzcamos.
     r = requests.get(URL)
 
@@ -23,4 +23,5 @@ def buscarActualizacion():
         versiones = [definicion.getText() for definicion in definiciones]
     
         if versiones[5] != INFORMACION["Version"]:
-            QMessageBox().information(QWidget(), "Actualización", "Nueva Actualización disponible ")
+            QMessageBox.information(QWidget(), "Actualización", "Nueva Actualización disponible, por favor instalela para estar a la ultima.")
+            return True

@@ -1,7 +1,6 @@
 from sys import argv, exit
 from PyQt5.Qt import Qt
 from os import getcwd
-from threading import Thread
 
 from modules import buscarActualizacion
 from modules import extractTipos 
@@ -16,7 +15,7 @@ class App(QtWidgets.QWidget):
         super().__init__(parent)
         self.ui = Ui_Principal()
         self.ui.setupUi(self)
-        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.setWindowFlags(Qt.FramelessWindowHint, Qt.WindowStaysOnBottomHint)
         self.ui.salir.setIcon(QtGui.QIcon("{}/asserts/salir.png".format(getcwd())))
         self.ui.salir.clicked.connect(self.salir)
         self.ui.inputTexto.returnPressed.connect(self.entrada)
@@ -91,10 +90,15 @@ class SecondProcess(QtCore.QThread):
 if __name__ == '__main__':
     cmd = QtWidgets.QApplication(argv)
     ventana = QtWidgets.QSplashScreen(QtGui.QPixmap("{}/asserts/loanding.PNG".format(getcwd())), Qt.WindowStaysOnBottomHint)
-    ventana.show()
     ventana.showMessage("Cargando...", Qt.AlignBottom, Qt.black)
-    app = App()
-    app.show()
-    ventana.finish(app)
-    Thread(target=buscarActualizacion)
+    ventana.show()
+    ventana.showMessage("Buscando Actualizaciones...", Qt.AlignBottom, Qt.black)
+    actualizacion = buscarActualizacion()
+    if not actualizacion:
+        app = App()
+        app.show()
+        ventana.finish(app)
+    else:
+        ventana.close()
+        exit()
     exit(cmd.exec_())
