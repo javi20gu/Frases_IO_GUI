@@ -2,10 +2,10 @@ from sys import argv, exit
 from PyQt5.Qt import Qt
 from os import getcwd
 
-from modules import buscarActualizaciones
+from modules import buscarActualizacion
 from modules import extractTipos 
 from modules import extractDefiniciones
-from modules.dicc import ABREVIACIONES
+from modules import ABREVIACIONES
 from UI.UI_main import QtWidgets, QtCore, Ui_Principal, QtGui
 
 
@@ -86,13 +86,14 @@ class SecondProcess(QtCore.QThread):
     def setVentanaPadre(self, ventanaPadre): 
         self.ventana = ventanaPadre
 
+
 if __name__ == '__main__':
     cmd = QtWidgets.QApplication(argv)
     ventana = QtWidgets.QSplashScreen(QtGui.QPixmap("{}/asserts/loanding.PNG".format(getcwd())), Qt.WindowStaysOnBottomHint)
     ventana.show()
     ventana.showMessage("Cargando...", Qt.AlignBottom, Qt.black)
-    buscarActualizaciones.buscarActualizacion()
     app = App()
     app.show()
     ventana.finish(app)
+    buscarActualizacion()
     exit(cmd.exec_())

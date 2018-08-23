@@ -1,7 +1,10 @@
+
+
 import requests
 from bs4 import BeautifulSoup
+from PyQt5.QtWidgets import QMessageBox, QWidget
 
-from version import INFORMACION
+from .version import INFORMACION
 
 
 URL = "https://github.com/javi20gu/Frases_IO_GUI/blob/master/version.json"
@@ -18,6 +21,6 @@ def buscarActualizacion():
         # Buscamos todas las definiciones.
         definiciones = soup.find_all("span", {"class": "pl-c1"})
         versiones = [definicion.getText() for definicion in definiciones]
-        for verion in versiones:
+        for version in versiones:
             if version > INFORMACION["Version"]:
-                pass
+                QMessageBox().information(QWidget(), "Actualización", "Nueva Actualización disponible v{}".format(version))
