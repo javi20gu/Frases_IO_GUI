@@ -1,6 +1,5 @@
 from sys import argv, exit
 from PyQt5.Qt import Qt
-from PyQt5.QtGui import QPixmap
 from os import getcwd
 
 from modules import extractTipos 
@@ -88,7 +87,7 @@ class SecondProcess(QtCore.QThread):
 
 if __name__ == '__main__':
     cmd = QtWidgets.QApplication(argv)
-    ventana = QtWidgets.QSplashScreen(QPixmap("{}/asserts/loanding.PNG".format(getcwd())), Qt.WindowStaysOnBottomHint)
+    ventana = QtWidgets.QSplashScreen(QtGui.QPixmap("{}/asserts/loanding.PNG".format(getcwd())), Qt.WindowStaysOnBottomHint)
     ventana.show()
     ventana.showMessage("Cargando...", Qt.AlignBottom, Qt.black)
     app = App()
