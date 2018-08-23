@@ -15,7 +15,7 @@ class App(QtWidgets.QWidget):
         super().__init__(parent)
         self.ui = Ui_Principal()
         self.ui.setupUi(self)
-        self.setWindowFlags(Qt.FramelessWindowHint, Qt.WindowStaysOnBottomHint)
+        self.setWindowFlags(Qt.FramelessWindowHint)
         self.ui.salir.setIcon(QtGui.QIcon("{}/asserts/salir.png".format(getcwd())))
         self.ui.salir.clicked.connect(self.salir)
         self.ui.inputTexto.returnPressed.connect(self.entrada)
