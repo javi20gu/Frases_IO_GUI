@@ -1,21 +1,23 @@
 import requests
 from bs4 import BeautifulSoup
 
-URL = "http://www.wordreference.com/definicion/"
+from version import INFORMACION
 
 
-def extractTipos(palabra: str):
+URL = "https://github.com/javi20gu/Frases_IO_GUI/blob/master/version.json"
+
+
+def buscarActualizacion():
     # Obtenemos los datos, segun la palabra que introduzcamos.
-    r = requests.get(URL + palabra)
+    r = requests.get(URL)
 
     # Verificamos que va a responder con el codigo 200.
     if r.status_code == 200:
         # Extraemos todos los datos
         soup = BeautifulSoup(r.text, "html.parser")
         # Buscamos todas las definiciones.
-        definiciones = soup.find_all("ol", {"class": "entry"})
-        
-        # Comprobamos que la palabra exista.
-        if definiciones:
-            # Retornamos los tipos de la palabra.
-            return [definicion.getText()[:definicion.getText()[:17].rfind(".")] for definicion in definiciones]
+        definiciones = soup.find_all("span", {"class": "pl-c1"})
+        versiones = [definicion.getText() for definicion in definiciones]
+        for verion in versiones:
+            if version > INFORMACION["Version"]:
+                pass

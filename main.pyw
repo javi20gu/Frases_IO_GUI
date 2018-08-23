@@ -2,6 +2,7 @@ from sys import argv, exit
 from PyQt5.Qt import Qt
 from os import getcwd
 
+from modules import buscarActualizaciones
 from modules import extractTipos 
 from modules import extractDefiniciones
 from modules.dicc import ABREVIACIONES
@@ -90,6 +91,7 @@ if __name__ == '__main__':
     ventana = QtWidgets.QSplashScreen(QtGui.QPixmap("{}/asserts/loanding.PNG".format(getcwd())), Qt.WindowStaysOnBottomHint)
     ventana.show()
     ventana.showMessage("Cargando...", Qt.AlignBottom, Qt.black)
+    buscarActualizaciones.buscarActualizacion()
     app = App()
     app.show()
     ventana.finish(app)
