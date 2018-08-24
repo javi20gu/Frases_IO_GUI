@@ -22,8 +22,8 @@ def buscarActualizacion():
         definiciones = soup.find_all("span", {"class": "pl-c1"})
         versiones = [definicion.getText() for definicion in definiciones]
 
-        if versiones[2] != INFORMACION["Version"]:
+        if float(versiones[2]) != INFORMACION["Version"]:
             QMessageBox.information(QWidget(), "Actualización",
                                     "Nueva Actualización disponible v{} -> (v{})".format(
-                                        INFORMACION["Version"], versiones[2]))
+                                        INFORMACION["Version"], float(versiones[2])))
             return True
