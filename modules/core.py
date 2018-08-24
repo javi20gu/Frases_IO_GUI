@@ -7,6 +7,7 @@ from modules import extractTipos
 from modules import extractDefiniciones
 from modules import ABREVIACIONES
 
+
 class App(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
@@ -57,9 +58,11 @@ class SecondProcess(QtCore.QThread):
                         tipos = [ABREVIACIONES[tipo] for tipo in tipos]
                         resultado = " o ".join(tipos)
                         self.ventana.inputResultado.addItem("La palabra |-{}-| es de tipo:  {}"
-                            .format(palabra, resultado))
+                                                            .format(palabra, resultado))
                     except KeyError as a:
-                        self.ventana.inputResultado.addItem("Error ({}): Abreviatura no incluida en el diccionario ({}), si quiere informar utilize el email -> javierhidalgo_c@hotmail.com".format(palabra, a))
+                        self.ventana.inputResultado.addItem("Error ({}): Abreviatura no incluida en "
+                                                            "el diccionario ({}), si quiere informar utilize el "
+                                                            "email -> javierhidalgo_c@hotmail.com".format(palabra, a))
     
                 else:
                     self.ventana.inputResultado.addItem(
@@ -71,8 +74,8 @@ class SecondProcess(QtCore.QThread):
             
                 if tipos:
                     resultado = "\n -->".join(tipos)
-                    self.ventana.inputResultado.addItem("La palabra |-{}-| se usa para:  \n --> {}"
-                        .format(palabra, resultado))
+                    self.ventana.inputResultado.addItem("La palabra |-{}-| se usa para:  \n --> {}".format(
+                        palabra, resultado))
                 else:
                     self.ventana.inputResultado.addItem(
                         "La palabra |-{}-| aún no está"

@@ -7,14 +7,15 @@ if __name__ == '__main__':
     from os import getcwd
 
     cmd = QtWidgets.QApplication(argv)
-    ventana = QtWidgets.QSplashScreen(QtGui.QPixmap("{}/asserts/loanding.PNG".format(getcwd())), QtCore.Qt.WindowStaysOnBottomHint)
+    ventana = QtWidgets.QSplashScreen(QtGui.QPixmap("{}/asserts/loanding.PNG".format(getcwd())),
+                                      QtCore.Qt.WindowStaysOnBottomHint)
     ventana.showMessage("Cargando...", QtCore.Qt.AlignBottom, QtCore.Qt.black)
     ventana.show()
 
     from sys import exit
 
-    from modules import buscarActualizacion, App, SecondProcess
-    
+    from modules import buscarActualizacion, App
+
     ventana.showMessage("Buscando Actualizaciones...", QtCore.Qt.AlignBottom, QtCore.Qt.black)
     actualizacion = buscarActualizacion()
 
@@ -29,4 +30,3 @@ if __name__ == '__main__':
         ventana.close()
         exit()
     exit(cmd.exec_())
-
