@@ -4,10 +4,14 @@ if __name__ == '__main__':
 
     from sys import argv
     from PyQt5 import QtWidgets, QtCore, QtGui
-    from os import getcwd
+    from os.path import join
 
+    from setting import CARPETA, RUTA_PRINCIPAL
+    
+    
     cmd = QtWidgets.QApplication(argv)
-    ventana = QtWidgets.QSplashScreen(QtGui.QPixmap("{}/asserts/loanding.PNG".format(getcwd())),
+    
+    ventana = QtWidgets.QSplashScreen(QtGui.QPixmap(join(RUTA_PRINCIPAL, CARPETA, "loanding.PNG")),
                                       QtCore.Qt.WindowStaysOnBottomHint)
     ventana.showMessage("Cargando...", QtCore.Qt.AlignBottom, QtCore.Qt.black)
     ventana.show()

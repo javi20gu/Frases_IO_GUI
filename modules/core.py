@@ -1,11 +1,12 @@
 
 
-from os import getcwd
+from os.path import join
 
 from UI.UI_main import QtWidgets, QtCore, Ui_Principal, QtGui
 from modules import extractTipos 
 from modules import extractDefiniciones
 from modules import ABREVIACIONES
+from setting import RUTA_PRINCIPAL, CARPETA
 
 
 class App(QtWidgets.QWidget):
@@ -15,7 +16,7 @@ class App(QtWidgets.QWidget):
         self.ui = Ui_Principal()
         self.ui.setupUi(self)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.ui.salir.setIcon(QtGui.QIcon("{}/asserts/salir.png".format(getcwd())))
+        self.ui.salir.setIcon(QtGui.QIcon(join(RUTA_PRINCIPAL, CARPETA, "salir.png")))
         self.ui.salir.clicked.connect(self.salir)
         self.ui.inputTexto.returnPressed.connect(self.entrada)
 
